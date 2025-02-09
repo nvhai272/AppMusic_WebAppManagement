@@ -1,0 +1,52 @@
+<h2 mat-dialog-title class="mb-5 text-center">Create Playlist</h2>
+<mat-dialog-content>
+    <div class="container-fluid">
+        <form [formGroup]="formCreatePlaylist" (ngSubmit)="createPlaylist()">
+
+            <div class="input-group input-group-outline mb-3">
+                <label class="col-5 ps-5 pt-2">Title</label>
+                <input formControlName="title" type="text" class="form-control" placeholder="Enter here">
+                <div *ngIf="submitted && f['title'].errors?.['required']" class="invalid-feedback">
+                    Title is required
+                </div>
+
+                <div *ngIf="submitted &&f['title'].errors?.['backendError']" class="invalid-feedback">
+                    {{ f['title'].errors?.['backendError'] }}
+                </div>
+            </div>
+
+            <div class="input-group input-group-outline mb-3">
+                <label class="col-5 ps-5 pt-2">User</label>
+                <form [formGroup]="userForm">
+                    <input matInput formControlName="userGroup" [matAutocomplete]="auto"
+                        placeholder="Search for username" (blur)="onBlueDi($event)" class="form-control">
+
+                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onUserSelected($event.option.value)">
+                        <mat-option *ngFor="let user of (filteredUsers | async)" [value]="user.username">
+                            {{ user.username }}
+                        </mat-option>
+                    </mat-autocomplete>
+                </form>
+
+                <div *ngIf="submitted && userForm.controls['userGroup'].hasError('required')" class="invalid-feedback">
+                    Username is required.
+                </div>
+
+                <!-- <div *ngIf="submitted && userForm.controls['userGroup'].hasError('notInList')" class="invalid-feedback">
+                    The selected username is not valid.
+                  </div> -->
+
+                <div *ngIf="f['userId'].errors?.['backendError']" class="invalid-feedback">
+                    {{ f['userId'].errors?.['backendError'] }}
+                </div>
+            </div>
+
+            <button mat-button color="primary" class="btn btn-lg bg-gradient-primary btn-lg w-150 mt-4 mb-0">
+                Save
+            </button>
+            <button mat-button mat-dialog-close class="btn btn-lg bg-gradient-black btn-lg w-150 mt-4 mb-0">
+                Cancel
+            </button>
+        </form>
+    </div>
+</mat-dialog-content>

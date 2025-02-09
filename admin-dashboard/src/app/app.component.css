@@ -1,0 +1,64 @@
+.material-icons {
+    font-weight: bold; 
+  }
+  .nav-link-text {
+    font-weight: bold; 
+  }
+  .green-text {
+    color:black; 
+    font-size: 16px;
+  }
+  .white-background {
+    background-color: white;
+    padding-left: 5px;
+    display: flex;
+    align-items: center;
+    border-radius: 8px; 
+    
+  }
+  .black-icon {
+    color: black; 
+  }
+  .scroll-container {
+    display: inline-block; 
+    width: 250px; 
+    height: 20px; 
+    overflow: hidden; 
+    white-space: nowrap; 
+    position: relative; 
+  }
+  .scrolling-text {
+    display: inline-block; 
+    position: relative;
+    animation: scroll-horizontal 5s linear infinite; 
+    line-height: 20px; 
+    color: black;
+  }
+  @keyframes scroll-horizontal {
+    0% {
+      transform: translateX(100%); 
+    }
+    100% {
+      transform: translateX(-100%); 
+    }
+  }
+  .icon-sm {
+    font-size: 20px; 
+    padding: 40px;   
+  }
+  .main-layout {
+  display: contents; 
+  }
+  
+  #sidenav-main {
+  flex: content; 
+  position: absolute; 
+  top: 0;
+  left: 0;
+  z-index: 1000; 
+  }
+  .main-content {
+  flex: 1; 
+  margin-left: 135px; 
+  }
+  

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+  <div class="main-layout">
+
+    <aside id="sidenav-main">
+      <app-sidebar></app-sidebar>
+    </aside>
+    <div class="main-content">
+      <main class="main-content max-height-vh-100 h-100">
+        <app-navbar></app-navbar>
+        <div class="container-fluid py-4 mt-2">
+          <div class="row">
+            <div class=" col-sm-3 ms-5">
+              <div class="card border ms-4">
+                <div class="d-flex justify-content-end">
+                  <div
+                    class="icon icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n2 position-absolute">
+                    <i class="material-icons opacity-10">headphones</i>
+                  </div>
+                </div>
+                <p class="text-sm mb-0 p-2 text-center text-danger font-weight-bolder">Music Views in {{currentMonth}}</p>
+                <p class="text-center font-weight-bolder text-dark">{{this.views}}</p>
+              </div>
+            </div>
+            <div class=" col-sm-8">
+              <div class="card border">
+                <div class="d-flex justify-content-end">
+                  <div
+                    class="icon icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n2 position-absolute">
+                    <i class="material-icons opacity-10">album</i>
+                  </div>
+                </div>
+                <p class="text-sm text-center text-danger p-2 mb-0 font-weight-bolder">Popular Song in {{currentMonth}}</p>
+                <p class="font-weight-bolder text-center text-dark" *ngIf="song?.songName; else noSong">
+                  {{song.songName}} - {{song.artistName}}
+                </p>
+                <ng-template #noSong>
+                  <p class="font-weight-bolder text-center text-dark">{{song}}</p>
+                </ng-template>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt-3">
+            <app-bieudo></app-bieudo>
+          </div>
+
+          <div class="row align-items-center justify-content-center">
+            <div class="col-11">
+                
+                  <p class="text-danger text-center text-capitalize font-weight-bolder">
+                    Top 5 - Song in {{currentMonth}}
+                  </p>
+             
+              <div class="table-responsive border-2 border-dark card mt-0">
+                <table class="align-items-center justify-content-center table-responsive table">
+                  <thead>
+                    <tr>
+                      <th class="text-uppercase text-primary text-xxs font-weight-bolder ps-5">
+                        Top
+                      </th>
+                      <th class="text-uppercase text-primary text-xxs font-weight-bolder ps-2">
+                        Song Name
+                      </th>
+                      <th class="text-uppercase text-primary text-xxs font-weight-bolder ps-2">
+                        Artist Name
+                      </th>
+                      <th class="text-uppercase text-primary text-xxs font-weight-bolder ps-2">
+                        Album Name
+                      </th>
+                      <th class="text-uppercase text-primary text-xxs font-weight-bolder ps-2">
+                        total views in month
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let i of songs; let idx = index" class="text-dark">
+
+                      <td>
+                        <p class="text-xs font-weight-bold ps-5">{{idx+1}}</p>
+                      </td>
+                      <td>
+                        <span class="text-xs font-weight-bold">{{i.songName}}</span>
+                      </td>
+                      <td>
+                        <span class="text-xs font-weight-bold">{{i.artistName}}</span>
+                      </td>
+                      <td>
+                        <span class="text-xs font-weight-bold">{{i.albumName}}</span>
+                      </td>
+                      <td>
+                        <span class="text-xs font-weight-bold">{{i.listenInMonth}}</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p *ngIf="songs && songs.length === 0" class="text-center text-secondary">
+                  Currently Not Available! </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</body>
+
+</html>

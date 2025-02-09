@@ -1,0 +1,48 @@
+<h2 mat-dialog-title class="ps-10" >Edit News</h2>
+<mat-dialog-content>
+    <div class="container-fluid">
+        <form role="form">
+            <div class="mt-2">
+                <label for="imageUpload" class="col-md-5 ps-5 pt-2">Change Image</label>
+                <button type="button" class="btn btn-primary" (click)="triggerFileInput()">Upload Image</button>
+                <input 
+                    id="imageUpload" 
+                    type="file" 
+                    class="d-none" 
+                    (change)="onFileSelected($event)" 
+                    accept="image/*"
+                >
+                
+            </div>
+            <div *ngIf="previewUrl">
+                <label class="d-block">Preview:</label>
+                <img [src]="previewUrl" alt="Image Preview" class="img-thumbnail" style="max-width: 200px;">
+            </div>
+
+            <div class="input-group input-group-outline mb-3">
+                <label class="col-md-5 ps-5 pt-2">Title</label>
+                <input formControlName="name" type="text" class="form-control">
+                <span class="invalid-feedback">
+                    <div class="input-group input-group-outline mb-3">
+                        <label for="exampleFormControlTextarea1" class="col-md-5"></label>
+                        <span>Title is required</span>
+                    </div>
+                </span>
+            </div>
+            <div class="input-group input-group-outline mb-3">
+                <label class="col-md-5 ps-5 pt-2">Content</label>
+                <textarea type="text" formControlName="address" class="form-control"></textarea>
+
+                <span class="invalid-feedback">
+                    <div class="input-group input-group-outline mb-3">
+                        <label for="exampleFormControlTextarea1" class="col-md-5"></label>
+                        <span>Content is required</span>
+                    </div>
+                </span>
+            </div>
+
+            <button mat-button color="primary" class=" btn btn-lg bg-gradient-primary btn-lg w-150 mt-4 mb-0">Save</button>
+            <button mat-button mat-dialog-close class="btn btn-lg bg-gradient-black btn-lg w-150 mt-4 mb-0">Cancel</button>
+        </form>
+    </div>
+</mat-dialog-content>

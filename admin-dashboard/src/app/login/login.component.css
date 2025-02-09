@@ -1,0 +1,44 @@
+/* Đảm bảo label ẩn khi có giá trị trong input */
+.input-group {
+  position: relative;
+}
+
+.input-group .form-label {
+  position: absolute;
+  top: 0;
+  left: 2px;
+  color: #777; /* Màu nhạt cho label */
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+.input-group .form-control {
+  padding: 15px 5px 5px; /* Đảm bảo có đủ không gian cho label */
+  border: 2px solid #ccc; /* Màu viền nhẹ */
+  border-radius: 5px;
+  font-size: 1em;
+  width: 100%;
+}
+
+.input-group .form-control:focus {
+  border-color: #007bff; /* Màu viền khi input đang được focus */
+  outline: none;
+}
+
+.input-group .form-control:not(:placeholder-shown) + .form-label {
+  opacity: 0; /* Ẩn label khi có dữ liệu */
+}
+
+/* Định dạng lỗi */
+.is-invalid {
+  border-color: red; /* Đổi màu viền khi có lỗi */
+}
+
+.invalid-feedback {
+  display: block;
+  color: red;
+  font-size: 0.9em;
+  margin-top: 5px;
+  visibility: visible;    
+}

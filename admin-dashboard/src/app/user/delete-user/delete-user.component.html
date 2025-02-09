@@ -1,0 +1,12 @@
+
+<div class="p-4">
+    <div mat-dialog-content>
+    <p class="text-dark">{{ data.message }} <b> {{data.username}}</b> ?</p>
+      </div>
+      
+      <div mat-dialog-actions>
+        <button mat-button color="primary" class="btn btn-lg bg-gradient-primary btn-lg w-150 mt-4"  (click)="onConfirm()">Delete</button>
+        <button mat-button mat-dialog-close class="btn btn-lg bg-gradient-black btn-lg w-150 mt-4" (click)="onNoClick()">Cancel</button>
+      </div>
+      
+</div>

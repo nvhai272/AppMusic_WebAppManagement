@@ -1,0 +1,31 @@
+<h2 mat-dialog-title class="text-center mb-5">Create Keyword</h2>
+<mat-dialog-content>
+  <div class="container-fluid">
+    <form [formGroup]="keywordForm" (ngSubmit)="saveKeyword()">
+        <div class="input-group input-group-outline mb-3 pt-2">
+            <label class="col-md-5 ps-5 pt-2">Content</label>
+            
+            <input formControlName="content" type="text" class="form-control"  placeholder="Enter content"
+                   [ngClass]="{'is-invalid':isSubmitted && keywordForm.get('content')?.invalid && keywordForm.get('content')?.touched}">
+            
+            <span class="invalid-feedback" *ngIf="keywordForm.get('content')?.invalid && keywordForm.get('content')?.touched && !keywordForm.controls['content'].hasError('backendError')">
+              <div class="input-group input-group-outline mb-3">
+                <label class="col-md-5"></label>
+                <span>Content is required</span>
+              </div>
+            </span>
+          
+            <span class="invalid-feedback" *ngIf="keywordForm.controls['content'].hasError('backendError')">
+              <div class="input-group input-group-outline mb-3">
+                <label class="col-md-5"></label>
+                <span>{{ keywordForm.controls['content'].getError('backendError') }}</span>
+              </div>
+            </span>
+          </div>
+          
+
+      <button mat-button color="primary" class="btn btn-lg bg-gradient-primary btn-lg w-150 mt-4 mb-0" type="submit">Save</button>
+      <button mat-button mat-dialog-close class="btn btn-lg bg-gradient-black btn-lg w-150 mt-4 mb-0" type="button">Cancel</button>
+    </form>
+  </div>
+</mat-dialog-content>

@@ -1,0 +1,87 @@
+<h2 mat-dialog-title class="text-center mb-4">Create Song</h2>
+<mat-dialog-content>
+    <div class="container-fluid">
+        <form role="form" [formGroup]="formCreateSong" (ngSubmit)="editSong()">
+
+            <div class="input-group input-group-outline mb-3">
+                <label class="col-md-5 ps-5 pt-2">Song title</label>
+                <input formControlName="title" type="text" class="form-control" placeholder="Enter here">
+                <div *ngIf="submitted && formCreateSong.controls['title'].hasError('required')"
+                    class="invalid-feedback">
+                    Song title is required
+                </div>
+                <div *ngIf="formCreateSong.controls['title'].hasError('backendError')" class="invalid-feedback">
+                    {{ formCreateSong.controls['title'].getError('backendError') }}
+                  </div>
+            </div>
+
+            <div class="input-group input-group-outline mb-3">
+                <label class="col-5 ps-5 pt-2">Select artist</label>
+                <form [formGroup]="artistForm!">
+                    <input matInput formControlName="artistGroup" [matAutocomplete]="auto"
+                        placeholder="Search for artist name" (blur)="onBlurArt($event)" class="form-control">
+                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onArtSelected($event.option.value)">
+                        <mat-option *ngFor="let art of (filteredArtists | async)" [value]="art.artistName">
+                            {{ art.artistName }}
+                        </mat-option>
+                    </mat-autocomplete>
+                </form>
+
+                <div *ngIf="submitted && artistForm!.controls['artistGroup'].hasError('required')"
+                    class="invalid-feedback">
+                    Artist is required.
+                </div>
+                
+            </div>
+
+            <!-- Album Selection -->
+            <div class="input-group input-group-outline mb-3">
+                <label class="col-5 ps-5 pt-2">Select album</label>
+                <form [formGroup]="albumForm!">
+                    <input matInput formControlName="albumGroup" [matAutocomplete]="autoAlbum"
+                        placeholder="Search for album name" (blur)="onBlurAlb($event)" class="form-control">
+                    <mat-autocomplete #autoAlbum="matAutocomplete"
+                        (optionSelected)="onAlbumSelected($event.option.value)">
+                        <mat-option *ngFor="let album of (filteredAlbums | async)" [value]="album.title">
+                            {{ album.title }}
+                        </mat-option>
+                    </mat-autocomplete>
+                </form>
+
+                <div *ngIf="submitted && albumForm!.controls['albumGroup'].hasError('required')"
+                    class="invalid-feedback">
+                    Album is required.
+                </div>
+            </div>
+
+            <div class="input-group input-group-outline mb-3">
+                <label class="col-5 ps-5 pt-2">Select genres</label>
+                <div class="form-control">
+                    <mat-select [multiple]="true" formControlName="genreIds" >
+                        <mat-option *ngFor="let genre of genres" [value]="genre.id">{{ genre.title }}</mat-option>
+                    </mat-select>
+                </div>
+                <div *ngIf="submitted && formCreateSong!.controls['genreIds'].hasError('required')"
+                class="invalid-feedback">
+                Genres is required. Select one or more
+            </div>
+            <div *ngIf="formCreateSong.controls['genreIds'].hasError('backendError')" class="invalid-feedback">
+                {{ formCreateSong.controls['genreIds'].getError('backendError') }}
+              </div>
+            </div>
+
+            <div class="input-group input-group-outline mb-3">
+                <label class="col-md-5 ps-5 pt-2">Feature artist</label>
+                <input formControlName="featureArtist" type="text" class="form-control" placeholder="Enter here">
+                
+                <div *ngIf="formCreateSong.controls['featureArtist'].hasError('backendError')" class="invalid-feedback">
+                    {{ formCreateSong.controls['featureArtist'].getError('backendError') }}
+                  </div>
+            </div>
+
+            <button mat-button color="primary" class="btn btn-lg bg-gradient-primary btn-lg w-150 mt-4">Save</button>
+            <button mat-button mat-dialog-close class="btn btn-lg bg-gradient-black btn-lg w-150 mt-4">Cancel</button>
+
+        </form>
+    </div>
+</mat-dialog-content>

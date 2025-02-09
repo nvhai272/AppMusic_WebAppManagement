@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body class="g-sidenav-show">
+    <div class="main-layout">
+        <aside id="sidenav-main">
+            <app-sidebar></app-sidebar>
+        </aside>
+        <div class="main-content">
+            <main class="main-content full-height position-relative">
+                <app-navbar></app-navbar>
+                <div class="container py-5">
+                    <div class="col-12 " *ngIf="detailData">
+
+                        <div
+                            class="d-flex alig-items-center justify-content-between bg-gradient-darkshadow-primary border-radius-lg">
+                            <h6 class="text-primary text-uppercase ps-3 pt-1">Song Infomation</h6>
+                            <div class="align-items-end text-end me-3">
+
+                                <a class="btn bg-gradient-info me-4" (click)="pendingToggle()">
+                                    <i class="material-icons text-sm"></i>Change Status
+                                </a>
+
+                                <a class="btn bg-gradient-success pb-2 me-4" (click)="openEditFile(detailData.id)"
+                                >
+                                    <i class="material-icons text-sm">music_note</i> Edit Lyric/Audio File
+                                </a>
+
+                                <a class="btn bg-gradient-dark pb-2 me-4" (click)="openEditDialog(detailData.id)">
+                                    <i class="material-icons text-sm">edit</i> Edit
+                                </a>
+
+                                <a class="btn bg-gradient-danger pb-2" (click)="openConfirmDialog()">
+                                    <i class="material-icons text-sm">delete</i> Delete
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="p-2 ms-2">
+                            <ul class="col-md-12 list-group">
+                                <li class="list-group-item border-2 d-flex p-4 bg-gray-100 border-dark">
+                                    <div class="row w-100 ">
+                                        <!-- Cột 1 -->
+                                        <div class="col-7">
+                                            <div class="mb-2">
+                                                <span class="text-s">Title:</span>
+                                                <span class="text-dark font-weight-bold ms-sm-2">{{
+                                                    detailData.title}}</span>
+                                            </div>
+
+                                            <div class="mb-2">
+                                                <span class="text-s">Status: </span>
+                                                <span *ngIf="detailData.isPending == true"
+                                                    class="text-xs badge badge-sm bg-gradient-info"
+                                                    style="color: white;"> Active</span>
+                                                <span *ngIf="detailData.isPending == false"
+                                                    class=" text-xs badge badge-sm bg-gradient-primary"
+                                                    style="color: white;"> No Active</span>
+                                            </div>
+
+                                            <div class="mb-2">
+                                                <span class="text-s">Artist:</span>
+                                                <span class="text-dark font-weight-bold ms-sm-2">{{
+                                                    detailData.artistName}}</span>
+                                            </div>
+                                            <div class="mb-2">
+                                                <span class="text-s">Album:</span>
+                                                <span class="text-dark font-weight-bold ms-sm-2">
+                                                    {{(detailData.albumTitle == null || detailData.albumTitle == '') ?
+                                                    'No Album' : detailData.albumTitle}}</span>
+                                            </div>
+                                            <div class="mb-2">
+                                                <span class="text-s">Genre:</span>
+                                                <span class="text-dark font-weight-bold ms-sm-2">{{
+                                                    detailData.genreNames}}</span>
+                                            </div>
+
+                                        </div>
+                                        <!-- Cột 2 -->
+                                        <div class="col-5">
+                                            <div class="mb-2">
+                                                <span class="text-s">Feature Artist:</span>
+                                                <span class="text-dark font-weight-bold ms-sm-2">
+                                                    {{(detailData.featureArtist == null || detailData.featureArtist ==
+                                                    '') ?
+                                                    'No Feature' : detailData.featureArtist}}</span>
+                                            </div>
+                                            <div class="mb-2">
+                                                <span class="text-s">Listen Amount:</span>
+                                                <span class="text-dark ms-sm-2 font-weight-bold">{{
+                                                    detailData.listenAmount ? detailData.listenAmount : 0}}</span>
+                                            </div>
+                                            <div class="mb-2">
+                                                <span class="text-s">Total Favourites:</span>
+                                                <span class="text-dark ms-sm-2 font-weight-bold">{{
+                                                    detailData.totalFavourite ? detailData.totalFavourite : 0}}</span>
+                                            </div>
+                                            <div class="mb-2">
+                                                <span class="text-s">Created At:</span>
+                                                <span class="text-dark ms-sm-2 font-weight-bold">{{
+                                                    detailData.createdAt| date: 'dd/MM/yyyy'}}</span>
+                                            </div>
+                                            <div class="mb-2">
+                                                <span class="text-s">Modified At:</span>
+                                                <span class="text-dark ms-sm-2 font-weight-bold">{{
+                                                    detailData.modifiedAt| date: 'dd/MM/yyyy'}}</span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </main>
+        </div>
+    </div>
+    <app-footer></app-footer>
+</body>
+
+</html>

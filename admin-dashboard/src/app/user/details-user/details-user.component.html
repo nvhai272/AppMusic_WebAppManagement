@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body class="g-sidenav-show">
+    <div class="main-layout">
+
+        <aside id="sidenav-main">
+            <app-sidebar></app-sidebar>
+        </aside>
+
+        <div class="main-content">
+
+            <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+                <app-navbar></app-navbar>
+
+                <div class="container py-4">
+                    <div class="col-12 " *ngIf="detailData">
+
+                        <div class="d-flex align-items-center justify-content-between bg-gradient-darkshadow-primary">
+                            <h6 class="text-primary text-uppercase">User Infomation</h6>
+                            <div class="align-items-end text-end me-3">
+                                <a class="btn bg-gradient-secondary me-4">
+                                    <i class="material-icons text-sm">password</i> Change
+                                    Password
+                                </a>
+                                <a class="btn bg-gradient-dark me-4" [routerLink]="['/users', detailData.id,'edit']"
+                                    [state]="{ user: detailData }">
+                                    <i class="material-icons text-sm">edit</i> Edit
+                                </a>
+                                <a class="btn bg-gradient-danger" (click)="openConfirmDialog()">
+                                    <i class="material-icons text-sm">delete</i> Delete
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <ul class="col-9 list-group">
+                                <li class="list-group-item border-2 d-flex p-4 mb-0 pb-0 bg-gray-100 border-dark ms-3">
+                                    <div class="row w-100 ">
+                                        <!-- Cột 1 -->
+                                        <div class="col-7">
+                                            <div class="mb-2">
+                                                <span class="text-s">Full name:</span>
+                                                <span class="text-dark font-weight-bold ms-sm-2">{{
+                                                    detailData.fullName}}</span>
+                                            </div>
+                                            <div class="mb-2">
+                                                <span class="text-s">Username:</span>
+                                                <span class="text-dark font-weight-bold ms-sm-2">{{
+                                                    detailData.username}}</span>
+                                            </div>
+                                            <div class="mb-2">
+                                                <span class="text-s">Email:</span>
+                                                <span class="text-dark font-weight-bold ms-sm-2">{{
+                                                    detailData.email}}</span>
+                                            </div>
+                                            <div class="mb-2">
+                                                <span class="text-s">Phone:</span>
+                                                <span class="text-dark font-weight-bold ms-sm-2">{{
+                                                    detailData.phone}}</span>
+                                            </div>
+
+
+                                        </div>
+                                        <!-- Cột 2 -->
+                                        <div class="col-5">
+
+                                            <div class="mb-2">
+                                                <span *ngIf="detailData.role === 'ROLE_ADMIN'"
+                                                    class="text-xs badge badge-sm bg-gradient-info"
+                                                    style="color: white;">admin</span>
+                                                <span *ngIf="detailData.role === 'ROLE_USER'"
+                                                    class=" text-xs badge badge-sm bg-gradient-primary"
+                                                    style="color: white;">user</span>
+                                                <span *ngIf="detailData.role === 'ROLE_ARTIST'"
+                                                    class="text-xs badge badge-sm bg-gradient-success"
+                                                    style="color: white;">artist</span>
+                                            </div>
+                                            <div class="mb-2">
+                                                <span class="text-s">DOB:</span>
+                                                <span class="text-dark font-weight-bold ms-sm-2">{{
+                                                    detailData.dob| date: 'dd/MM/yyyy'}}</span>
+                                            </div>
+                                            <div class="mb-2">
+                                                <span class="text-s">Created At:</span>
+                                                <span class="text-dark ms-sm-2 font-weight-bold">{{
+                                                    detailData.createdAt| date: 'dd/MM/yyyy'}}</span>
+                                            </div>
+                                            <div class="mb-2">
+                                                <span class="text-s">Modified At:</span>
+                                                <span class="text-dark ms-sm-2 font-weight-bold">{{
+                                                    detailData.modifiedAt| date: 'dd/MM/yyyy'}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="col-3 text-center" *ngIf="imageUrl">
+                                <img [src]="imageUrl" alt="User Avatar" class="img-thumbnail border-dark ms-6"
+                                    style="width: 200px;; height: 200px;">
+                                <div class="mt-2 text-center">
+                                    <a class="btn bg-gradient-success ms-6" (click)="openEditAva(detailData.id)">
+                                        <i class="material-icons text-sm">image</i>Change Image
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="card border-radius-lg border-2 me-2 ms-1 border-dark">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <h6 class="text-primary text-capitalize ps-3">
+                                    {{ begin === 0 ? 'Favorite Song List' : 'Favorite Album List' }}
+                                </h6>
+
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <a *ngIf="begin === 0" class="btn bg-gradient-info opacity-9 ps-2 mt-2 me-4 ms-2"
+                                        (click)="toggleFavoriteList()">
+                                        <i class="material-icons text-sm">autorenew</i> View Favorite Album List
+                                    </a>
+                                    <a *ngIf="begin === 1" class="btn bg-gradient-info opacity-9  ps-2 mt-2 me-4 ms-2"
+                                        (click)="toggleFavoriteList()">
+                                        <i class="material-icons text-sm">autorenew</i> View Favorite Song List
+                                    </a>
+                                </div>
+                            </div>
+
+                            <table *ngIf="listData && listData.length > 0" class="table align-items-center text-dark">
+                                <thead>
+                                    <tr>
+                                        <th class="text-uppercase text-primary text-xs font-weight-bolder ps-3">STT</th>
+                                        <th class="text-uppercase text-primary text-xs font-weight-bolder ps-2">
+                                            {{ begin === 0 ? 'Song Name' : 'Album Name' }}
+                                        </th>
+                                        <th class="text-uppercase text-primary text-xs font-weight-bolder ps-2">Artist
+                                            Name</th>
+                                        <th class="text-uppercase text-primary text-xs font-weight-bolder ps-2">
+                                            {{ begin === 0 ? 'Feature Artist' : 'Release Date' }}
+                                        </th>
+
+                                        <th class="text-uppercase text-primary text-xs font-weight-bolder ps-2">
+                                            {{ begin === 0 ? 'Genre' : 'Release' }}
+                                        </th>
+                                        <th class="text-uppercase text-primary text-xs font-weight-bolder ps-2"></th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <tr *ngFor="let data of listData;let idx = index">
+                                        <td>
+                                            <div class="d-flex px-2">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <p class="text-xs font-weight-bold">{{ idx+1 }}</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <p class="text-xs font-weight-bold">{{ data.title }}</p>
+                                        </td>
+                                        <td>
+                                            <p class="text-xs font-weight-bold">{{ data.artistName }}</p>
+                                        </td>
+                                        <td>
+                                            <p class="text-xs font-weight-bold">
+                                                {{ begin === 0 ? (data.featureArtist ? data.featureArtist: 'No Feature')
+                                                : (data.isReleased | date: 'dd/MM/yyyy')}}
+                                            </p>
+                                        </td>
+
+                                        <td>
+                                            <p class="text-xs font-weight-bold">
+                                                {{ begin === 0 ? data.genreNames : (data.isReleased ? 'Released' : 'Not
+                                                Released')}}
+                                            </p>
+                                        </td>
+
+                                        <td class="align-middle">
+                                            <a class="cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown"
+                                                aria-expanded="false">
+                                                <i
+                                                    class="material-icons opacity-10 black-icon text-danger">more_vert</i>
+                                            </a>
+                                            <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5 border border-dark"
+                                                aria-labelledby="dropdownTable">
+                                                <li>
+                                                    <a class="dropdown-item border-radius-md font-weight-bold">
+                                                        Remove From List
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p *ngIf="listData && listData.length === 0" class="text-center text-secondary">
+                                The user does not currently have this data! </p>
+                        </div>
+
+                        <mat-paginator [pageSize]="5" [pageSizeOptions]="[5]" (page)="onPageChange($event)"
+                            aria-label="Select page" showFirstLastButtons class="mt-3 text-dark font-weight-bold">
+
+                        </mat-paginator>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <app-footer></app-footer>
+</body>
+
+</html>

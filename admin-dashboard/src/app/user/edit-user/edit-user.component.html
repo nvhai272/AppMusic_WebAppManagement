@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body class="g-sidenav-show">
+    <div class="main-layout">
+
+        <aside id="sidenav-main">
+            <app-sidebar></app-sidebar>
+        </aside>
+
+        <div class="main-content">
+            <main class="main-content position-relative max-height-vh-100 h-100">
+                <!-- Navbar -->
+                <app-navbar></app-navbar>
+                <!-- End Navbar -->
+                <div class="container py-5">
+                    <div class="card">
+                        <br>
+                        <h2 class="text-center">Edit User</h2>
+                        <br>
+                        <form [formGroup]="formEditUser" (ngSubmit)="editUser()">
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <!-- Select Role -->
+                                    <div class="input-group input-group-outline mb-3">
+                                        <label class="col-4 ps-5 pt-2" style="font-size: smaller;">Select
+                                            Role</label><br>
+                                        <select formControlName="role" name="role" class="form-control me-8" required>
+                                            <option value="" disabled>Select role</option>
+                                            <option value="ROLE_ADMIN" [selected]="user?.role === 'ROLE_ADMIN'">Admin
+                                            </option>
+                                            <option value="ROLE_USER" [selected]="user?.role === 'ROLE_USER'">User
+                                            </option>
+                                            <option value="ROLE_ARTIST" [selected]="user?.role === 'ROLE_ARTIST'">Artist
+                                            </option>
+                                        </select>
+                                        <div *ngIf="submitted && f['role'].errors?.['required']"
+                                            class="invalid-feedback">
+                                            Role is required
+                                        </div>
+                                        <div *ngIf="submitted &&f['role'].errors?.['backendError']"
+                                            class="invalid-feedback">
+                                            {{ f['role'].errors?.['backendError'] }}
+                                        </div>
+                                    </div>
+
+                                    <!-- Username -->
+                                    <div class="input-group input-group-outline mb-3">
+                                        <label class="col-4 ps-5 pt-2" style="font-size: smaller;">Username</label>
+                                        <input formControlName="username" type="text" class="form-control me-8"
+                                            [value]="user?.username" placeholder="Enter here">
+                                        <div *ngIf="submitted && f['username'].errors?.['required']"
+                                            class="invalid-feedback">
+                                            Username is required
+                                        </div>
+                                        <div *ngIf="submitted && f['username'].errors?.['minlength']"
+                                            class="invalid-feedback">
+                                            Username must be at least 8 characters
+                                        </div>
+
+                                        <div *ngIf="submitted &&f['username'].errors?.['backendError']"
+                                            class="invalid-feedback">
+                                            {{ f['username'].errors?.['backendError'] }}
+                                        </div>
+
+                                    </div>
+
+                                    <!-- Full Name -->
+                                    <div class="input-group input-group-outline mb-3">
+                                        <label class="col-4 ps-5 pt-2" style="font-size: smaller;">Full Name</label>
+                                        <input formControlName="fullName" type="text" class="form-control me-8"
+                                            [value]="user?.fullName" placeholder="Enter here">
+                                        <div *ngIf="submitted && f['fullName'].errors?.['required']"
+                                            class="invalid-feedback">
+                                            Full name is required
+                                        </div>
+
+
+                                        <div *ngIf="submitted &&f['fullName'].errors?.['backendError']"
+                                            class="invalid-feedback">
+                                            {{ f['fullName'].errors?.['backendError'] }}
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-6">
+
+
+                                    <!-- Phone -->
+                                    <div class="input-group input-group-outline mb-3">
+                                        <label class="col-4 ps-5 pt-2" style="font-size: smaller;">Phone</label>
+                                        <input type="text" formControlName="phone" class="form-control me-8"
+                                            [value]="user?.phone" placeholder="Enter here">
+                                        <div *ngIf="submitted && f['phone'].errors?.['required']"
+                                            class="invalid-feedback">
+                                            Phone is required
+                                        </div>
+
+                                        <div *ngIf="submitted &&f['phone'].errors?.['backendError']"
+                                        class="invalid-feedback">
+                                        {{ f['phone'].errors?.['backendError'] }}
+                                    </div>
+                                    </div>
+
+                                    <!-- Email -->
+                                    <div class="input-group input-group-outline mb-3">
+                                        <label class="col-4 ps-5 pt-2" style="font-size: smaller;">Email</label>
+                                        <input type="email" formControlName="email" class="form-control me-8"
+                                            [value]="user?.email" placeholder="Enter here">
+                                        <div *ngIf="submitted && f['email'].errors?.['required']"
+                                            class="invalid-feedback">
+                                            Email is required
+                                        </div>
+                                        <div *ngIf="submitted &&f['email'].errors?.['backendError']"
+                                        class="invalid-feedback">
+                                        {{ f['email'].errors?.['backendError'] }}
+                                    </div>
+                                    </div>
+
+                                    <!-- DOB -->
+                                    <div class="input-group input-group-outline mb-3">
+                                        <label class="col-md-4 ps-5 pt-2" style="font-size: smaller;">DOB</label>
+                                        <input type="date" formControlName="dob" class="form-control me-8"
+                                            [value]="user?.dob" placeholder="Enter here">
+                                        <div *ngIf="submitted && f['dob'].errors?.['required']"
+                                            class="invalid-feedback">
+                                            Date of birth is required
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-start mb-3 ms-5 mt-5">
+
+                                    <button color="primary" type="submit"
+                                        class="btn btn-lg bg-gradient-primary">Save</button>
+                                    <button type="button" class="btn btn-lg bg-gradient-secondary ms-4"
+                                        onclick="window.history.back();">Cancel</button>
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+
+</html>
+<app-footer></app-footer>

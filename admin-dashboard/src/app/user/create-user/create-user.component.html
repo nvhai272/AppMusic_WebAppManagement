@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body class="g-sidenav-show">
+    <div class="main-layout">
+
+        <aside id="sidenav-main">
+            <app-sidebar></app-sidebar>
+        </aside>
+
+        <div class="main-content ">
+            <main class="main-content position-relative max-height-vh-100 h-100 ">
+                <!-- Navbar -->
+                <app-navbar></app-navbar>
+                <!-- End Navbar -->
+                <div class="container py-5">
+                    <div class="card">
+                        <br>
+                        <h2 class="text-center">Create New User</h2>
+                        <br>
+                        <form [formGroup]="formCreateUser" (ngSubmit)="createUser()">
+                            <div class="row">
+                                <div class="col-5 hehe">
+                                        <label class="ps-5 pt-2" style="font-size: smaller;">Upload Avatar</label><br>
+                                       
+                                        <button type="button" class="btn btn-primary ms-6" (click)="triggerFileInput()">Upload Image</button>
+                                        <input 
+                                            id="imageUpload" 
+                                            type="file" 
+                                            class="d-none" 
+                                            (change)="onFileSelected($event)" 
+                                            accept="image/*"
+                                        >
+                                        
+                                        <label class="invalid-feedback ">
+                                            {{ imageError }}
+                                        </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-5">
+                                    <!-- Select Role -->
+                                    <div class="input-group input-group-outline mb-3">
+                                        <label class="col-5 ps-5 pt-2" style="font-size: smaller;">Select Role</label><br>
+                                        <select formControlName="role" name="role" class="form-control" required>
+                                            <option value="" disabled selected>Select role</option>
+                                            <option value="ROLE_ADMIN">Admin</option>
+                                            <option value="ROLE_USER">User</option>
+                                            <option value="ROLE_ARTIST">Artist</option>
+                                        </select>
+                                        <div *ngIf="submitted && f['role'].errors?.['required']"
+                                            class="invalid-feedback">
+                                            Role is required
+                                        </div>
+                                    </div>
+
+                                    <!-- Username -->
+                                    <div class="input-group input-group-outline mb-3">
+                                        <label class="col-5 ps-5 pt-2" style="font-size: smaller;">Username</label>
+                                        <input formControlName="username" type="text" class="form-control"  placeholder="Enter here">
+                                        <div *ngIf="submitted && f['username'].errors?.['required']"
+                                            class="invalid-feedback">
+                                            Username is required
+                                        </div>
+                                        <div *ngIf="submitted && f['username'].errors?.['minlength']"
+                                            class="invalid-feedback">
+                                            Username must be at least 8 characters
+                                        </div>
+
+                                        <div *ngIf="submitted &&f['username'].errors?.['backendError']"
+                                            class="invalid-feedback">
+                                            {{ f['username'].errors?.['backendError'] }}
+                                        </div>
+                                    </div>
+
+                                    <!-- Password -->
+                                    <div class="input-group input-group-outline mb-3">
+                                        <label class="col-5 ps-5 pt-2" style="font-size: smaller;">Password</label>
+
+                                        <!-- <div class="input-container">
+                                            <input id="password" [type]="showPassword ? 'text' : 'password'"
+                                                formControlName="password" class="form-control" />
+                                            <i [class]="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"
+                                                class="toggle-icon" (click)="togglePasswordVisibility()"></i>
+                                        </div> -->
+
+                                        <input formControlName="password" type="password" class="form-control" placeholder="Enter here">
+
+                                        <div *ngIf="submitted && f['password'].errors?.['required']"
+                                            class="invalid-feedback">
+                                            Password is required
+                                        </div>
+                                        <div *ngIf="submitted && f['password'].errors?.['minlength']"
+                                            class="invalid-feedback">
+                                            Password must be at least 8 characters
+                                        </div>
+                                        <div *ngIf="submitted && f['password'].errors?.['pattern']"
+                                            class="invalid-feedback">
+                                            Password must contain a special character
+                                        </div>
+                                        <div *ngIf="submitted &&f['password'].errors?.['backendError']"
+                                            class="invalid-feedback">
+                                            {{ f['password'].errors?.['backendError'] }}
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                                <div class="col-1"></div>
+
+                                <div class="col-5">
+                                    <!-- Full Name -->
+                                    <div class="input-group input-group-outline mb-3">
+                                        <label class="col-5 ps-5 pt-2" style="font-size: smaller;">Full Name</label>
+                                        <input formControlName="fullName" type="text" class="form-control" placeholder="Enter here">
+                                        <div *ngIf="submitted && f['fullName'].errors?.['required']"
+                                            class="invalid-feedback">
+                                            Full name is required
+                                        </div>
+                                    </div>
+
+                                    <!-- Phone -->
+                                    <div class="input-group input-group-outline mb-3">
+                                        <label class="col-md-5 ps-5 pt-2" style="font-size: smaller;">Phone</label>
+                                        <input type="text" formControlName="phone" class="form-control" placeholder="Enter here">
+                                        <div *ngIf="submitted && f['phone'].errors?.['required']"
+                                            class="invalid-feedback">
+                                            Phone is required
+                                        </div>
+                                        <div *ngIf="submitted && f['phone'].errors?.['pattern']"
+                                            class="invalid-feedback">
+                                            Phone must be a 10 or 11 number
+                                        </div>
+                                        <div *ngIf="submitted &&f['phone'].errors?.['backendError']"
+                                            class="invalid-feedback">
+                                            {{ f['phone'].errors?.['backendError'] }}
+                                        </div>
+                                    </div>
+
+                                    <!-- Email -->
+                                    <div class="input-group input-group-outline mb-3">
+                                        <label class="col-md-5 ps-5 pt-2" style="font-size: smaller;">Email</label>
+                                        <input type="email" formControlName="email" class="form-control" placeholder="Enter here">
+                                        <div *ngIf="submitted && f['email'].errors?.['required']"
+                                            class="invalid-feedback">
+                                            Email is required
+                                        </div>
+                                        <div *ngIf="submitted && f['email'].errors?.['email']" class="invalid-feedback">
+                                            Email is invalid
+                                        </div>
+                                        <div *ngIf="submitted &&f['email'].errors?.['backendError']"
+                                            class="invalid-feedback">
+                                            {{ f['email'].errors?.['backendError'] }}
+                                        </div>
+                                    </div>
+
+                                    <!-- DOB -->
+                                    <div class="input-group input-group-outline mb-3">
+                                        <label class="col-md-5 ps-5 pt-2" style="font-size: smaller;">DOB</label>
+                                        <input type="date" formControlName="dob" class="form-control" placeholder="Enter here">
+                                        <div *ngIf="submitted && f['dob'].errors?.['required']"
+                                            class="invalid-feedback">
+                                            Date of birth is required
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-center mb-3">
+                                    <button color="primary" type="submit"
+                                        class="btn btn-lg bg-gradient-primary">Save</button>
+                                </div>
+
+                            </div>
+                        </form>
+                        <div class="container-fluid">
+                        </div>
+                    </div>
+                </div>
+                
+            </main>
+        </div>
+    </div>
+   
+</body>
+
+</html>
+<app-footer></app-footer>

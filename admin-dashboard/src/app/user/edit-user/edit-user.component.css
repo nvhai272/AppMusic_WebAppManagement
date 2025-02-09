@@ -1,0 +1,25 @@
+.main-content {
+    flex: 1;
+    margin-left: 135px;
+  }
+  
+  .input-group .form-control {
+    /* padding: 5px 5px 5px; */
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 0.8em;
+  }
+
+  .input-group .form-control:focus {
+    border-color: #007bff;
+    outline: none;
+  } 
+
+  .invalid-feedback {
+    display: block;
+    color: red;
+    font-size: 0.9em;
+    margin-top: 5px;
+    visibility: visible;
+    padding-left: 34% !important;
+  }

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body class="g-sidenav-show">
+    <div class="main-layout">
+
+        <aside id="sidenav-main">
+            <app-sidebar></app-sidebar>
+        </aside>
+
+        <div class="main-content">
+            <main class="main-content position-relative max-height-vh-100 h-100">
+                <!-- Navbar -->
+                <app-navbar></app-navbar>
+                <!-- End Navbar -->
+
+                <div class="container py-5">
+                   
+                            <div class="card-body bg-gradient-while">
+                                <div class="position-relativez-index-2">
+                                    <div
+                                    class="d-flex align-items-center justify-content-between bg-gradient-darkshadow-primary border-radius-lg">
+                                        <h6 class="text-primary text-uppercase">Genre List</h6>
+                                        <div class="align-items-end text-end">
+                                            <a class="btn bg-gradient-info pb-2" (click)="openAddGenreDialog()">
+                                                <i class="material-icons text-sm">add</i>&nbsp;&nbsp;Add New
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card border-3 border-dark ">
+                                    <div class="table-responsive">
+                                        <table class="table align-items-center">
+                                            <thead>
+                                                <tr>
+                                                    <th
+                                                        class="text-uppercase text-primary text-xs font-weight-bolder ps-3">
+                                                        stt</th>
+                                                    <th
+                                                        class="text-uppercase text-primary text-xs font-weight-bolder ps-2">
+                                                        title</th>
+                                                    <th
+                                                        class="text-uppercase text-primary text-xs font-weight-bolder ps-2">
+                                                        total songs</th>
+                                                    <th
+                                                        class="text-uppercase text-primary text-xs font-weight-bolder ps-2">
+                                                        created_at</th>
+                                                    <th
+                                                        class="text-uppercase text-primary text-xs font-weight-bolder ps-2">
+                                                        modified_at</th>
+
+                                                    <th
+                                                        class="text-uppercase text-primary text-xs font-weight-bolder ps-2">
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="text-dark">
+                                                <tr *ngFor="let g of data; let i = index">
+                                                    <td>
+                                                        <div class="d-flex px-2 py-1">
+                                                            <div class="d-flex flex-column justify-content-center">
+                                                                <p class="text-xs font-weight-bold">{{i+1}}</p>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <p class="text-xs font-weight-bold">{{g.title}}</p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="text-xs font-weight-bold">{{g.totalSong}}</p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="text-xs font-weight-bold">{{g.createdAt | date:
+                                                            'dd/MM/yyyy' }}</p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="text-xs font-weight-bold">{{g.modifiedAt| date:
+                                                            'dd/MM/yyyy'}}</p>
+                                                    </td>
+
+                                                    <td class="align-middle">
+                                                        <a class="cursor-pointer" id="dropdownTable"
+                                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                                            <i class="material-icons opacity-10 black-icon text-danger">more_vert</i>
+                                                        </a>
+                                                        <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5 border border-dark"
+                                                            aria-labelledby="dropdownTable">
+                                                            <li><a class="dropdown-item border-radius-md font-weight-bold"
+                                                                    [routerLink]="['/genres', g.id, 'details']">Details</a>
+                                                            </li>
+                                                            <!-- <li><a class="dropdown-item border-radius-md font-weight-bold"
+                                                                    [routerLink]="['/genres', g.id, 'edit']">Edit</a>
+                                                            </li> -->
+                                                            <li><a class="dropdown-item border-radius-md font-weight-bold"
+                                                                (click)="openConfirmDialog(g.id.toString(),g.title.toString())">Delete</a>
+                                                            </li>
+                                                        </ul>
+
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <mat-paginator [length]="totalItems" [pageSize]="10" [pageSizeOptions]="[10,20,30]"
+                        (page)="onPageChange($event)" aria-label="Select page" class="mt-3 text-dark font-weight-bold">
+                    </mat-paginator>
+                </div>
+            </main>
+        </div>
+    </div>
+    <app-footer></app-footer>
+</body>
+
+</html>

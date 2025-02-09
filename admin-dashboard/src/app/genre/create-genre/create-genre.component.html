@@ -1,0 +1,61 @@
+<h2 mat-dialog-title class="text-center mb-5">Create Genre</h2>
+<mat-dialog-content>
+
+    <div class="container-fluid">
+        <form [formGroup]="formCreateGenre" (ngSubmit)="createGenre()">
+
+            <div class="mb-3">
+                <label class="col-md-5 ps-5 pt-2">Image</label>
+                <button type="button" class="btn btn-primary mt-1" (click)="triggerFileInput()">Upload Image</button>
+                <input id="imageUpload" type="file" class="d-none" (change)="onFileSelected($event)" accept="image/*">
+                <div *ngIf="imageError" style="color: red; margin-left: 13rem;">
+                    {{ imageError }}
+                </div>
+            </div>
+
+            <div class="input-group input-group-outline mb-3">
+                <label class="col-5 ps-5 pt-2">Title</label>
+                <input formControlName="title" type="text" class="form-control" placeholder="Enter here">
+                <div *ngIf="submitted && f['title'].errors?.['required']" class="invalid-feedback">
+                    Title is required
+                </div>
+
+                <div *ngIf="submitted &&f['title'].errors?.['backendError']" class="invalid-feedback">
+                    {{ f['title'].errors?.['backendError'] }}
+                </div>
+            </div>
+
+            <div class="input-group input-group-outline mb-3">
+                <label class="col-5 ps-5 pt-2">Color</label>
+                <select [(ngModel)]="selectedColor" name="color" class="form-control" [ngModelOptions]="{standalone: true}">
+                  <option value="" disabled selected>Select color</option>
+                  <option value="1">Green</option>
+                  <option value="2">Blue</option>
+                  <option value="3">Yellow</option>
+                </select>
+                <div *ngIf="submitted && !selectedColor" class="invalid-feedback">
+                  {{ errColor }}
+                </div>
+              </div>
+              
+            <div class="input-group input-group-outline mb-3">
+                <label class="col-5 ps-5 pt-2">Description</label>
+                <textarea formControlName="description" rows="5" class="form-control"
+                    placeholder="Enter here"></textarea>
+
+                <div *ngIf="submitted && f['description'].errors?.['required']" class="invalid-feedback">
+                    Description is required
+                </div>
+                <div *ngIf="submitted && f['description'].errors?.['backendError']" class="invalid-feedback">
+                    {{ f['description'].errors?.['backendError'] }}
+                </div>
+            </div>
+            <button mat-button color="primary" class="btn btn-lg bg-gradient-primary btn-lg w-150 mt-4 mb-0">
+                Save
+            </button>
+            <button mat-button mat-dialog-close class="btn btn-lg bg-gradient-black btn-lg w-150 mt-4 mb-0">
+                Cancel
+            </button>
+        </form>
+    </div>
+</mat-dialog-content>
