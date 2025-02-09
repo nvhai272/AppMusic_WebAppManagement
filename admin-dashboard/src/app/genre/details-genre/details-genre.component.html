@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body class="g-sidenav-show">
+    <div class="main-layout">
+
+        <aside id="sidenav-main">
+            <app-sidebar></app-sidebar>
+        </aside>
+
+        <div class="main-content">
+
+            <main class="main-content position-relative max-height-vh-100 h-100">
+                <app-navbar></app-navbar>
+
+                <div class="container py-5">
+                    <div class="col-12 " *ngIf="detailData">
+                        <div
+                            class="d-flex align-items-center justify-content-between bg-gradient-darkshadow-primary border-radius-lg">
+                            <h6 class="text-primary text-uppercase ps-2">Genre Infomation</h6>
+                            <div class="align-items-end text-end me-3">
+                                <a class="btn bg-gradient-dark me-4">
+                                    <i class="material-icons text-sm">edit</i>&nbsp;&nbsp;Edit
+                                </a>
+                                <a class="btn bg-gradient-danger" (click)="openConfirmDialog()">
+                                    <i class="material-icons text-sm">delete</i> Delete
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="row ms-2">
+                            <ul class="col-md-9 list-group">
+                                <li class="list-group-item border-2 d-flex p-4 bg-gray-100 border-dark">
+                                    <div class="row w-100 ">
+                                        <!-- Cột 1 -->
+                                        <div class="col-7">
+                                            <div class="mb-2">
+                                                <span class="text-s">Title:</span>
+                                                <span class="text-dark font-weight-bold ms-sm-2">{{
+                                                    detailData.title}}</span>
+                                            </div>
+                                            <div class="mb-2">
+                                                <span class="text-s">Total Song:</span>
+                                                <span class="text-dark font-weight-bold ms-sm-2">{{
+                                                    detailData.totalSong}}</span>
+                                            </div>
+                                            <div class="mb-2">
+                                                <span class="text-s">Color:</span>
+                                                <span class="text-dark font-weight-bold ms-sm-2">{{
+                                                    detailData.color}}</span>
+                                            </div>
+                                        </div>
+                                        <!-- Cột 2 -->
+                                        <div class="col-5">
+                                            <div class="mb-2">
+                                                <span class="text-s"></span>
+                                                <span class="text-dark ms-sm-2 font-weight-bold"></span>
+                                            </div>
+
+                                            <div class="mb-2">
+                                                <span class="text-s">Created At</span>
+                                                <span class="text-dark ms-sm-2 font-weight-bold">{{detailData.createdAt | date:
+                                                            'dd/MM/yyyy' }}</span>
+                                            </div>
+                                            <div class="mb-2">
+                                                <span class="text-s">Modified At</span>
+                                                <span class="text-dark ms-sm-2 font-weight-bold">{{detailData.modifiedAt | date:
+                                                            'dd/MM/yyyy' }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="mb-2">
+                                            <span class="text-s">Description: </span>
+                                            <span class="text-dark ms-sm-2">{{detailData.description}}</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="col-3 text-center" *ngIf="imageUrl">
+                                <img [src]="imageUrl" alt="Artist Avatar" class="img-thumbnail border-dark ms-5"
+                                    style="width: 200px; height: 200px;">
+                                <div class="mt-2 ms-5">
+                                    <a class="btn bg-gradient-success">
+                                        <i class="material-icons text-sm ">image</i> Change Image
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <app-footer></app-footer>
+</body>
+
+</html>

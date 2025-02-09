@@ -1,0 +1,20 @@
+.input-group .form-control {
+  padding: 15px 5px 5px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  font-size: 1em;
+}
+
+.input-group .form-control:focus {
+  border-color: #007bff;
+  outline: none;
+} 
+
+.invalid-feedback {
+  display: block;
+  color: red;
+  font-size: 0.9em;
+  margin-top: 5px;
+  visibility: visible;
+  padding-left: 42% !important;
+}

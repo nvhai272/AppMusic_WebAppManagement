@@ -1,0 +1,205 @@
+<aside
+  class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-4 fixed-start ms-3 bg-gradient-dark"
+  id="sidenav-main">
+  <div class="sidenav-header">
+    <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
+      aria-hidden="true" id="iconSidenav"></i>
+
+    <div style="height: 100px; display: flex; justify-content: center; align-items: center;;">
+      <img src="/assets/img/anh1.png" alt="Sample Image" style="max-width: 100%; max-height: 140%;" />
+    </div>
+
+  </div>
+  <hr class="horizontal light mt-0 mb-2" />
+  <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
+    <ul class="navbar-nav" *ngIf="role === 'ROLE_ADMIN'; else notAdmin">
+      <li class="nav-item">
+        <a class="nav-link text-white" routerLink="/dashboard" routerLinkActive="active bg-gradient-primary">
+          <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+            <i class="material-icons opacity-10 font-weight-bolder">dashboard</i>
+          </div>
+          <span class=" nav-link-text ms-1 font-weight-bolder">Dashboard</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" routerLink="/users" [class.active]="isActive(['/users', '/add-user'])"
+        [class.bg-gradient-primary]="isActive(['/users', '/add-user'])">
+          <span class="nav-link-text ms-1 font-weight-bolder" style="padding-right: 66px;">Users</span>
+          <div class="white-background">
+            <div class="text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10 black-icon">person</i>
+              <span class="nav-link-text ms-1 font-weight-bolder">&nbsp; {{ userCount }} &nbsp;</span>
+            </div>
+          </div>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" routerLink="/songs" [class.active]="isActive(['/songs', '/add-song'])"
+        [class.bg-gradient-primary]="isActive(['/songs', '/add-song'])">
+          <span class="nav-link-text ms-1 font-weight-bolder" style="padding-right: 64px;">Songs</span>
+          <div class="white-background">
+
+            <div class="text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10 black-icon">music_note</i>
+              <span class="nav-link-text ms-1 font-weight-bolder">&nbsp; {{ songCount }} &nbsp;</span>
+            </div>
+
+          </div>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" routerLink="/playlists" [class.active]="isActive(['/playlists', '/add-playlist'])"
+        [class.bg-gradient-primary]="isActive(['/playlists', '/add-playlist'])">
+          <span class="nav-link-text ms-1 font-weight-bolder" style="padding-right: 52px;">Playlists</span>
+          <div class="white-background">
+
+            <div class="text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10 black-icon">playlist_play</i>
+              <span class="nav-link-text ms-1 font-weight-bolder">&nbsp; {{ playlistCount }} &nbsp;</span>
+            </div>
+          </div>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" routerLink="/albums" [class.active]="isActive(['/albums', '/add-album'])"
+        [class.bg-gradient-primary]="isActive(['/albums', '/add-album'])">
+          <span class="nav-link-text ms-1 font-weight-bolder" style="padding-right: 57px;">Albums</span>
+          <div class="white-background">
+
+            <div class="text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10 black-icon">library_music</i>
+              <span class="nav-link-text ms-1 font-weight-bolder">&nbsp; {{ albumCount }} &nbsp;</span>
+            </div>
+          </div>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" routerLink="/artists" [class.active]="isActive(['/artists', '/add-artist'])"
+        [class.bg-gradient-primary]="isActive(['/artists', '/add-artist'])">
+          <span class="nav-link-text ms-1 font-weight-bolder" style="padding-right: 64px;">Artists</span>
+          <div class="white-background">
+
+            <div class="text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10 black-icon">person</i>
+              <span class="nav-link-text ms-1 font-weight-bolder">&nbsp; {{ artistCount }} &nbsp;</span>
+            </div>
+          </div>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" routerLink="/genres" [class.active]="isActive(['/genres', '/add-genre'])"
+        [class.bg-gradient-primary]="isActive(['/genres', '/add-genre'])">
+          <span class="nav-link-text ms-1 font-weight-bolder" style="padding-right: 60px;">Genres</span>
+          <div class="white-background">
+
+            <div class="text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10 black-icon">category</i>
+              <span class="nav-link-text ms-1 font-weight-bolder">&nbsp; {{ genreCount }} &nbsp;</span>
+            </div>
+          </div>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" routerLink="/subjects" [class.active]="isActive(['/subjects', '/add-subject'])"
+        [class.bg-gradient-primary]="isActive(['/subjects', '/add-subject'])">
+          <span class="nav-link-text ms-1 font-weight-bolder" style="padding-right: 38px;">Categories</span>
+          <div class="white-background">
+
+            <div class="text-center me-2 d-flex align-items-center justify-content-center font-weight-bolder">
+              <i class="material-icons opacity-10 black-icon">format_list_bulleted</i>
+              <span class="nav-link-text ms-1 ">&nbsp; {{ categoryCount }} &nbsp;</span>
+            </div>
+          </div>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" routerLink="/keywords" [class.active]="isActive(['/keywords', '/add-keywords'])"
+        [class.bg-gradient-primary]="isActive(['/keywords', '/add-keywords'])">
+          <span class="nav-link-text ms-1 font-weight-bolder" style="padding-right: 44px;">Keywords</span>
+          <div class="white-background">
+
+            <div class="text-center me-2 d-flex align-items-center justify-content-center font-weight-bolder">
+              <i class="material-icons opacity-10 black-icon">search</i>
+              <span class="nav-link-text ms-1 ">&nbsp; {{ keywordCount }} &nbsp;</span>
+            </div>
+          </div>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" routerLink="/news" [class.active]="isActive(['/news', '/add-new'])"
+        [class.bg-gradient-primary]="isActive(['/news', '/add-new'])">
+          <span class="nav-link-text ms-1 font-weight-bolder" style="padding-right: 70px;">News</span>
+          <div class="white-background">
+
+            <div class="text-center me-2 d-flex align-items-center justify-content-center font-weight-bolder">
+              <i class="material-icons opacity-10 black-icon">chat</i>
+              <span class="nav-link-text ms-1 ">&nbsp; {{ newsCount }} &nbsp;</span>
+            </div>
+          </div>
+        </a>
+      </li>
+      <li class="nav-item mt-3">
+        <h6 class="ps-4 ms-2 text-white font-weight-bolder">
+          Account pages
+        </h6>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" routerLink="/login" (click)="onLogout()">
+          <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+            <i class="material-icons opacity-10">logout</i>
+          </div>
+          <span class="nav-link-text ms-1 font-weight-bolder">Log Out</span>
+        </a>
+      </li>
+    </ul>
+    <ng-template #notAdmin>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link text-white" routerLink="/art-overview" routerLinkActive="active bg-gradient-primary">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10 font-weight-bolder">person</i>
+            </div>
+            <span class=" nav-link-text ms-1 font-weight-bolder">My Account</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" routerLink="/song" routerLinkActive="active bg-gradient-primary">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10 font-weight-bolder">music_note</i>
+            </div>
+            <span class=" nav-link-text ms-1 font-weight-bolder">My Songs</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" routerLink="/album" routerLinkActive="active bg-gradient-primary">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10 font-weight-bolder">playlist_play</i>
+            </div>
+            <span class=" nav-link-text ms-1 font-weight-bolder">My Albums</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" routerLink="/top" routerLinkActive="active bg-gradient-primary">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10 font-weight-bolder">library_music</i>
+            </div>
+            <span class=" nav-link-text ms-1 font-weight-bolder">Top Music</span>
+          </a>
+        </li>
+        <li class="nav-item mt-3">
+          <h6 class="ps-4 ms-2 text-white font-weight-bolder">
+            Account pages
+          </h6>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" routerLink="/login" (click)="onLogout()">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">logout</i>
+            </div>
+            <span class="nav-link-text ms-1 font-weight-bolder">Log Out</span>
+          </a>
+        </li>
+        </ul>
+    </ng-template>
+  </div>
+</aside>

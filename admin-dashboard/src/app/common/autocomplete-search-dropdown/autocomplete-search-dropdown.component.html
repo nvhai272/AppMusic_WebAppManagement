@@ -1,0 +1,36 @@
+<!-- <form [formGroup]="artistForm">
+                           
+                              <input type="text" class="form-control"
+                                     matInput
+                                     placeholder=" Search album..."
+                                     formControlName="stateGroup"
+                                     required
+                                     [matAutocomplete]="autoGroup">
+                                <mat-autocomplete #autoGroup="matAutocomplete">
+                                  @for (group of artistGroupOptions | async; track group) {
+                                    <mat-optgroup [label]="group.letter">
+                                      @for (name of group.names; track name) {
+                                        <mat-option [value]="name">{{name}}</mat-option>
+                                      }
+                                    </mat-optgroup>
+                                  }
+                              </mat-autocomplete>
+                         
+                          </form> -->
+
+<!-- <p-autocomplete class="" [(ngModel)]="selectedArtist" [suggestions]="filteredArtist"
+                    (completeMethod)="filterArtist($event)" optionLabel="artistName"
+                    placeholder="Search for an artist...">
+                </p-autocomplete> -->
+
+<form [formGroup]="artistForm">
+
+  <input matInput formControlName="artistGroup" [matAutocomplete]="auto" placeholder="Search for artist"
+    class="form-control">
+
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onArtistSelected($event.option.value)">
+    <mat-option *ngFor="let artist of (filteredArtists | async)" [value]="artist.artistName">
+      {{ artist.artistName }}
+    </mat-option>
+  </mat-autocomplete>
+</form>

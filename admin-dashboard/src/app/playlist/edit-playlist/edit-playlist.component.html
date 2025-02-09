@@ -1,0 +1,21 @@
+<h2 mat-dialog-title class="text-center mb-3" >Edit Playlist</h2>
+<mat-dialog-content>
+    <div class="container-fluid">
+        <form role="form" [formGroup]="formEdit" (ngSubmit)="edit()">
+            <div class="input-group input-group-outline mb-3">
+                <label class="col-md-5 ps-5 pt-2">Playlist Title</label>
+                <input formControlName="title" type="text" class="form-control">
+                <div *ngIf="submitted && formEdit.controls['title'].hasError('required')"
+                    class="invalid-feedback">
+                    Song title is required
+                </div>
+                <div *ngIf="formEdit.controls['title'].hasError('backendError')" class="invalid-feedback">
+                    {{ formEdit.controls['title'].getError('backendError') }}
+                  </div>
+            </div>
+
+            <button mat-button color="primary" class=" btn btn-lg bg-gradient-primary btn-lg w-150 mt-4 mb-0">Save</button>
+            <button mat-button mat-dialog-close class="btn btn-lg bg-gradient-black btn-lg w-150 mt-4 mb-0">Cancel</button>
+        </form>
+    </div>
+</mat-dialog-content>

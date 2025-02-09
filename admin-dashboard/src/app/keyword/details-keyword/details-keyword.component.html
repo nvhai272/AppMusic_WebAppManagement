@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body class="g-sidenav-show">
+    <div class="main-layout">
+        <aside id="sidenav-main">
+            <app-sidebar></app-sidebar>
+        </aside>
+        <div class="main-content">
+            <main class="main-content full-height position-relative">
+                <!-- Navbar -->
+                <app-navbar></app-navbar>
+                <!-- End Navbar -->
+
+                <!-- <div class="container-fluid py-4 pb-2">
+                    <div class="row">
+                        <div class="col-12 ms-0">
+
+                            <div class="card">
+                                <div *ngIf="detailData"
+                                    class="d-flex align-items-center justify-content-between bg-gradient-info shadow-info border-radius-lg pt-2 pb-2">
+                                    <h6 class="text-white text-capitalize ps-3 mb-0 pt-1">Keyword Details Information
+                                    </h6>
+                                    <div class="align-items-end text-end me-3">
+                                        <a class="btn bg-gradient-secondary mb-0 pb-2 ps-2 me-3"
+                                            (click)="openEditGenreDialog()">
+                                            <i class="material-icons text-sm ">edit</i>&nbsp;&nbsp;Edit
+                                        </a>
+                                        <a class="btn bg-gradient-primary mb-0 pb-2 ps-2"
+                                            (click)="openEditGenreDialog()">
+                                            <i class="material-icons text-sm ">delete</i>&nbsp;&nbsp;Delete
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="card-body pt-4">
+                                    <div class="card-body" style="background-color: aliceblue;">
+                                        <div class="mb-2">
+                                            <span class="text-s">Content:</span>
+                                            <span class="text-dark font-weight-bold ms-sm-2">{{detailData.content}}</span>
+                                        </div>
+                                        <div class="mb-2">
+                                            <span class="text-s">is_Active: </span>
+                                            <span *ngIf="detailData.isActive == true"
+                                            class="badge badge-sm bg-gradient-info"
+                                            style="color: white;"> Active</span>
+                                        <span *ngIf="!detailData.isActive"
+                                            class="badge badge-sm bg-gradient-success"
+                                            style="color: white;"> No Active</span>
+                                        </div>
+                                        <div class="mb-2">
+                                            <span class="text-s">Created_At: </span>
+                                            <span class="text-dark ms-sm-2 font-weight-bold">{{
+                                                detailData.createdAt| date: 'dd/MM/yyyy'}}</span>
+                                        </div>
+                                        <div class="mb-2">
+                                            <span class="text-s">Modified_At: </span>
+                                            <span class="text-dark ms-sm-2 font-weight-bold">{{
+                                                detailData.modifiedAt| date: 'dd/MM/yyyy'}}</span>
+                                        </div>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div> -->
+
+               
+            </main>
+        </div>
+    </div>
+    <app-footer></app-footer>
+</body>
+
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body class="g-sidenav-show">
+    <div class="main-layout">
+
+        <aside id="sidenav-main">
+            <app-sidebar></app-sidebar>
+        </aside>
+        <div class="main-content">
+            <main class="main-content full-height position-relative">
+                <app-navbar></app-navbar>
+                <div class="container py-5">
+                    <div class="col-12 " *ngIf="detailData">
+
+                        <div
+                            class="d-flex alig-items-center justify-content-between bg-gradient-darkshadow-primary border-radius-lg">
+                            <h6 class="text-primary text-uppercase ps-3 pt-1">Playlist Infomation</h6>
+                            <div class="align-items-end text-end me-3">
+                                <a class="btn bg-gradient-dark pb-2 me-4" (click)="openEditDialog(detailData.id)">
+                                    <i class="material-icons text-sm">edit</i> Edit
+                                </a>
+
+                                <a class="btn bg-gradient-danger pb-2" (click)="openConfirmDialog()">
+                                    <i class="material-icons text-sm">delete</i>&nbsp;&nbsp;Delete
+                                </a>
+                            </div>
+                        </div>
+
+
+                        <div class="p-2 ms-2">
+                            <ul class="col-md-12 list-group">
+                                <li class="list-group-item border-2 d-flex p-4 bg-gray-100 border-dark">
+                                    <div class="row w-100 ">
+                                        <!-- Cột 1 -->
+                                        <div class="col-7">
+                                            <div class="mb-2">
+                                                <span class="text-s">ID:</span>
+                                                <span class="text-dark font-weight-bold ms-sm-2">{{
+                                                    detailData.id}}</span>
+                                            </div>
+                                            <div class="mb-2">
+                                                <span class="text-s">Title:</span>
+                                                <span class="text-dark font-weight-bold ms-sm-2">{{
+                                                    detailData.title}}</span>
+                                            </div>
+
+                                            <div class="mb-2">
+                                                <span class="text-s">Total Song:</span>
+                                                <span class="text-dark font-weight-bold ms-sm-2">{{
+                                                    detailData.totalSong}}</span>
+                                            </div>
+
+                                        </div>
+                                        <!-- Cột 2 -->
+                                        <div class="col-5">
+                                            <div class="mb-2">
+                                                <span class="text-s">Username:</span>
+                                                <span class="text-dark font-weight-bold ms-sm-2">{{
+                                                    detailData.username}}</span>
+                                            </div>
+                                            <div class="mb-2">
+                                                <span class="text-s">Created At:</span>
+                                                <span class="text-dark ms-sm-2 font-weight-bold">{{
+                                                    detailData.createdAt| date: 'dd/MM/yyyy'}}</span>
+                                            </div>
+                                            <div class="mb-2">
+                                                <span class="text-s">Modified At:</span>
+                                                <span class="text-dark ms-sm-2 font-weight-bold">{{
+                                                    detailData.modifiedAt| date: 'dd/MM/yyyy'}}</span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+
+                        </div>
+
+                        <div class="card border-radius-lg border-2 mt-3 me-2 ms-3 p-2 border-dark">
+                            <div class="d-flex align-items-center justify-content-between  ">
+                                <h6 class="text-primary text-capitalize ps-3">Playlist Music</h6>
+
+                                <div class="d-flex align-items-center justify-content-between ">
+                                    <!-- tao tim kiem nhac trong danh sach -->
+                                    <!-- <app-autocomplete-search-dropdown></app-autocomplete-search-dropdown> -->
+
+                                    <a class="btn bg-gradient-info ps-2 mt-3 me-4 ms-2">
+                                        <i class="material-icons text-sm">add</i>&nbsp;&nbsp;Add Song To Playlist
+                                    </a>
+                                </div>
+                            </div>
+                            <table class="table align-items-center text-dark">
+                                <thead>
+                                    <tr>
+                                        <th class="text-uppercase text-primary text-xs font-weight-bolder ps-3">
+                                            STT</th>
+                                        <th class="text-uppercase text-primary text-xs font-weight-bolder ps-2">
+                                            Song Name</th>
+                                        <th class="text-uppercase text-primary text-xs font-weight-bolder ps-2">
+                                            Artist Name</th>
+                                        <th class="text-uppercase text-primary text-xs font-weight-bolder ps-2">
+                                            Feature Artist</th>
+                                        <th class="text-uppercase text-primary text-xs font-weight-bolder ps-2">
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngIf="listSong && listSong.length > 0">
+
+                                    <tr *ngFor="let song of listSong; let i = index">
+                                        <td>
+                                            <div class="d-flex px-2">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <p class="text-xs font-weight-bold">{{i+1}}</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <p class="text-xs font-weight-bold">{{song.title}}</p>
+                                        </td>
+                                        <td>
+                                            <p class="text-xs font-weight-bold">{{song.artistName}}</p>
+                                        </td>
+                                        <td>
+                                            <p class="text-xs font-weight-bold">{{song.featureArtist? song.featureArtist :'No Feature'}}</p>
+                                        </td>
+                                        <td class="align-middle">
+                                            <a class="cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown"
+                                                aria-expanded="false">
+                                                <i
+                                                    class="material-icons opacity-10 black-icon text-danger">more_vert</i>
+                                            </a>
+                                            <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5  border border-dark"
+                                                aria-labelledby="dropdownTable">
+
+                                                <li><a class="dropdown-item border-radius-md font-weight-bold">Remove
+                                                        From List</a>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                        <mat-paginator [length]="totalSongOfPlaylist" [pageSize]="5" [pageSizeOptions]="[5]"
+                            (page)="onPageChange($event)" aria-label="Select page" showFirstLastButtons=""
+                            class="mt-3 text-dark font-weight-bold">
+                        </mat-paginator>
+                    </div>
+
+                </div>
+            </main>
+        </div>
+    </div>
+    <app-footer></app-footer>
+
+</body>
+
+</html>

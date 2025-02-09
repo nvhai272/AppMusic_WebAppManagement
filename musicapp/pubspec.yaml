@@ -1,0 +1,32 @@
+name: musicapp
+description: "A new Flutter project."
+publish_to: "none"
+version: 0.1.0
+
+environment:
+  sdk: ^3.5.4
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  provider: ^6.1.2
+  audioplayers: ^6.1.0
+  http:
+  scrollable_positioned_list: ^0.3.8
+  intl: ^0.20.1
+  shared_preferences: ^2.3.4
+  jwt_decoder:
+  carousel_slider:
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/audio/
+    - assets/images/
+    - assets/lyrics/
