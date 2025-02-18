@@ -1,4 +1,4 @@
-# AppMusic_WebAppManagement - Kiến trúc Client-Server
+# AppMusic_WebAppManagement - Client-Server
 Backend (Java Spring Boot), Frontend: App Flutter and Web Angular
 1. Java Spring Boot: Khởi tạo dự án bằng Spring Initializr là một công cụ web giúp bạn nhanh chóng tạo ra một dự án Spring Boot mới mà không cần phải cấu hình thủ công từ đầu. Bạn có thể chọn các thành phần như dependencies, phiên bản Spring Boot, Java version, và các cấu hình cơ bản khác khi tạo dự án. Nó giúp tiết kiệm thời gian và công sức trong việc thiết lập cấu trúc dự án.
 - Lombok: Giúp giảm bớt code bằng cách tự động tạo các phương thức như getter, setter, toString, v.v.
